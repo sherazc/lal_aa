@@ -23,3 +23,12 @@ console.log(obj2.toString());
 (function(){
     console.log("self executing funtion");
 })();
+
+var myobject={
+    var1: "Variable 1",
+    var2: "variable 2"
+};
+console.log(myobject);
+delete myobject.var2;
+console.log(myobject);
+
