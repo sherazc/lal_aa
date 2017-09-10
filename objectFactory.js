@@ -32,3 +32,18 @@ console.log(myobject);
 delete myobject.var2;
 console.log(myobject);
 
+var funArgument = function(){
+    console.log(arguments);
+}
+
+funArgument(1,2,3,4,5);
+
+var funArray = function(){
+    var al=[];
+    for(var v in arguments){
+        al[v] = arguments[v];
+    }
+    return al;
+}
+
+console.log(funArray(2,4,6,8));
