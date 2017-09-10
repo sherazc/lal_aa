@@ -20,3 +20,6 @@ obj2.add1="Don't know";
 console.log(obj1.toString());
 console.log(obj2.toString());
 
+(function(){
+    console.log("self executing funtion");
+})();
