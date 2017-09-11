@@ -1,33 +1,38 @@
-console.log("Bismilla hi Rahman ..");
-// console.log(module);
-// console.log(module.exports);
-// console.log(exports);
-// console.log(this);
-var a = 20;
-console.log(a);
+console.log("Bimillah");
+var var1 ={
+    name:"Quazi",
+    func1:function(){
+        console.log("function from variable");
+    }
+}
 
-var aa = function(){
-    var i;
-    for(i=1;i<5;i++)
+console.log(var1.name);
+var1.func1();
+
+var func2 = function(){
+    console.log(arguments);
+    var myarray =[];
+    for(var v in arguments)
     {
-        console.log("calling function aa.."+i);
+        myarray[v]=arguments[v];
     }
+    console.log("my array : " + myarray);
 }
-aa();
+func2(1,2,3,4,5,6,7);
+(function(){
+    console.log("self calling function");
+})();
 
-var obj = {
-    a:10,
-    fun1:function(){
-        return this.a*2;
-    }
+var csMath = function(constr){
+    console.log("calling from object "+ constr);
+    this.myAdd = function(a,b)
+    {
+        console.log(a+b);
+    };
+}
+var obj1 = new csMath("obj1");
+obj1.myAdd(7,8); 
+csMath.prototype.mysub=function(a,b){
+    console.log(a-b);
 };
-console.log(obj.a);
-console.log(obj.fun1());
-
-obj.b=15;
-obj.fun2 = function(name){
-    console.log("Name is " + name);
-}
-
-console.log(obj.b);
-obj.fun2("Arif");
+obj1.mysub(9,2);
