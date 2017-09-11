@@ -36,3 +36,26 @@ csMath.prototype.mysub=function(a,b){
     console.log(a-b);
 };
 obj1.mysub(9,2);
+
+csMath.prototype.mult = function(a,b){
+    console.log(a*b);
+};
+obj1.mult(7,8);
+
+function objFactory()
+{
+    return{
+        Lname:"Quazi",
+        Mname:"Mohammad",
+        FName:"Areeb",    
+        tostring: function (){
+            return this.Lname + " "+ this.Mname +" "+ this.FName;
+        }
+    };
+}
+var o1 = new objFactory();
+console.log(o1.tostring());
+o1.Lname = "Last";
+o1.FName="First Name";
+o1.Mname = "Middle";
+console.log(o1.tostring());
