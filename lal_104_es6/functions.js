@@ -4,13 +4,16 @@
 var a ={
     regFn: function(){
         console.log("Regular function");
+    },
+    shortFn(){
+        console.log("This is example of short function");
     }    
 }
 
-//short function
-function shortFn()
+//dir function
+function dirFn()
 {
-    console.log("Short function!");
+    console.log("function by name!");
 }
 // arrow function without {}
 
@@ -31,7 +34,7 @@ function anynumFn(...param){
     console.log(param);
 }
 a.regFn();
-shortFn();
+dirFn();
 arrowFn();
 arrowFn1();
 anynumFn(1,2,3,4,5);
