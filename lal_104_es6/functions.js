@@ -38,3 +38,14 @@ dirFn();
 arrowFn();
 arrowFn1();
 anynumFn(1,2,3,4,5);
+
+// function with parameters
+let num =[1,2,3,4];
+
+let doubleArray=num.map(function(number){
+    return number*2;
+});
+
+let doubArray=num.map(number=>number*2);
+console.log(doubArray);
+console.log(doubleArray);
