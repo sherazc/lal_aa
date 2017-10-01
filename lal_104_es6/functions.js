@@ -49,3 +49,22 @@ let doubleArray=num.map(function(number){
 let doubArray=num.map(number=>number*2);
 console.log(doubArray);
 console.log(doubleArray);
+
+// rest function parameter
+
+let sum1 = function(...numbers){
+    console.log(numbers);
+    return numbers.reduce((PreviousNum,currentNumber)=>currentNumber+PreviousNum);
+}
+console.log(`sum = ${sum1(1,2,3,4,5)}`);
+
+let multiply1 = (multiplier,...numbers)=>{
+console.log(multiplier,numbers);
+}
+multiply1(3,2,4,6,8);
+
+let multiply2 = (multiplier,...numbers)=>{
+    console.log(numbers.map((number)=>multiplier*number));
+    }
+    multiply2(3,2,4,6,8);
+    
