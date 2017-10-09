@@ -6,6 +6,8 @@ var http = require('http');
 // app.use(bodyparser());
 /* GET users listing. */
 router.post('/', function(req, res, next) {
+    res.render('index', { title: 'Employee' });
+    // res.render('index',{status:'AE'});
     var strconcat="";
 let mysql = require("mysql");
 let conString = {
@@ -50,7 +52,8 @@ let querySel = con.query("select * from emp order by id",function(error,result){
     strconcat =strconcat.concat("</table>");
     console.log(strconcat);
     req.body.emplist = strconcat;
-    res.send(strconcat);
+    //res.send(strconcat);
+    res.redirect("/emplist");
 });
 con.end();
 

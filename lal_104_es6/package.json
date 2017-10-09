@@ -5,11 +5,14 @@
   "main": "eg01.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "nm":"nodemon es6_03.js"
+    "nm": "nodemon es6_03.js"
   },
   "author": "",
   "license": "ISC",
   "devDependencies": {
     "babel-preset-es2015": "^6.24.1"
+  },
+  "dependencies": {
+    "express": "^4.16.1"
   }
 }
