@@ -8,7 +8,16 @@ export default class EmployeeDao extends BaseDao {
             super.endConnection(connection);
          });
     }
+    findEmpByID(employeeId,updateemployeeProcessor) {
+        let connection = super.connect();
+     
+        connection.query('select id, name, salary from employee where id=?',employeeId, (error, employees) => {
+            updateemployeeProcessor(employees);
+            super.endConnection(connection);
+         });
+    }
     deleteById(employeeId, deleteEmployeeProcessor) {
+       
         let connection = super.connect();
         connection.query('delete from employee where id=?', employeeId, (error, result) => {
             deleteEmployeeProcessor(employeeId);
@@ -17,6 +26,7 @@ export default class EmployeeDao extends BaseDao {
     }
 
     addEmployee(name, salary, addEmployeeProcessor) {
+        
         let connection = super.connect();
         let queryObject ={
             name: name,
@@ -26,6 +36,20 @@ export default class EmployeeDao extends BaseDao {
         connection.query('insert into employee set ?', queryObject, (error, result) => {
             console.log(error);
             addEmployeeProcessor(name, salary);
+            super.endConnection(connection);
+         });
+    }
+
+    updateEmployee(id,name, salary, upEmployeeProcessor) {
+       
+        let connection = super.connect();
+        var sql = "UPDATE employee set name =? , salary =?  WHERE id = ?";
+        connection.query(sql,[name,salary,id], (error, result) => {
+            if(error){
+                console.log("error" + error);
+            }
+            console.log("called update " + name);
+            upEmployeeProcessor(id,name, salary);
             super.endConnection(connection);
          });
     }

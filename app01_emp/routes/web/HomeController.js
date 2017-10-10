@@ -1,6 +1,6 @@
 class HomeController {
        home (request, response) {
-           response.redirect('/add');
+           response.redirect('/list');
        }
     }    
 export default HomeController;
