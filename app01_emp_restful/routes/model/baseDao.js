@@ -1,16 +1,9 @@
-import mysql from "mysql";
+import mysql from 'mysql';
+import settings from './settings';
 
-let connectionConfig = {
-    host: "localhost",
-    user: "root",
-    password: "abc123",
-    port: 3306,
-    database: "employeedb"
- };
-
- export default class BaseDao {
+export default class baseDao{
     connect() {
-        let connection = mysql.createConnection(connectionConfig);
+        let connection = mysql.createConnection(settings.connectionString);
        
         connection.connect((error) => {
            if (error) {
@@ -30,5 +23,16 @@ let connectionConfig = {
             }
          });         
     }
-    
- }
+    execSql(sql,callback){
+        let connection = this.connect();
+        connection.query(sql,(err,data)=>{
+            if(err){
+                callback(null,err);
+            }
+            else{
+                callback(data);
+            }
+        });
+        this.endConnection(connection);
+    }
+}
