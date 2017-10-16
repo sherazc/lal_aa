@@ -5,22 +5,26 @@ let msg = new httpMssgs();
 import util from 'util';
 export default class employeeDao extends baseDao{
  getEmpList(req,res){
-    super.execSql("select * from employee",function(data,err){
+    super.execSql("select * from employee",function(err,data){
         if(err){
-                msg.show500(req,res,err);
+            console.log("ERRor");   
+            msg.show500(req,res,err);
+            console.log(err);
         }
         else{
+            console.log("success");
             msg.show200(req,res,data);
         }
        // res.end();
     });
  }   
  getEmpByID(req,res,empid){
-    super.execSql("select * from employee where id="+empid,function(data,err){
+    super.execSql("select * from employee where id="+empid,function(err,data){
         if(err){
                 msg.show500(req,res,err);
         }
         else{
+            console.log(data);
             msg.show200(req,res,data);
         }
         //res.end();
@@ -28,10 +32,13 @@ export default class employeeDao extends baseDao{
  }
  AddEmp(req,res,reqBody){
     try{
+        console.log("server post");
+        //console.log(req);
             if(!reqBody){
                     throw new error("Input invalid");
             }
             var data = JSON.parse(reqBody);
+            console.log(data);
             if(data){
                 let sql = "insert into employee(name,salary) values";
                 sql+=util.format("('%s', %d)",data.name,data.salary);
@@ -56,14 +63,17 @@ export default class employeeDao extends baseDao{
     }
  }
  updateEmp(req,res,reqBody){
+    console.log("update emp....");
     if(!reqBody){
-        throw new error("invalid input");
+       console.log("invalid data");
     }
+    console.log('data');
     let data = JSON.parse(reqBody);
+    console.log(data);
     if(data){
-    if(!data.id){ throw new error("empid not provided")};
+    if(!data.eid){ console.log("empid not provided")};
     var sql = "UPDATE employee set ";
-    sql+="name='"+data.name+"', salary="+data.salary+" where id="+ data.id;
+    sql+="name='"+data.name+"', salary="+data.salary+" where id="+ data.eid;
     super.execSql(sql,function(data,err){
         if(err){
                 msg.show500(req,res,err);
@@ -75,20 +85,24 @@ export default class employeeDao extends baseDao{
     }
  }
   deleteEmp(req,res,reqBody){
+      console.log("delete empppp");
     if(!reqBody){
-        throw new error("invalid input");
+        //throw new error("invalid input");
+        next(new Error('problem error'));
     }
     let data = JSON.parse(reqBody);
-    if(data){
-    if(!data.id){ throw new error("empid not provided")};
+    if(data){console.log(data.params.id);
+    if(!data.params.id){ throw new Error("empid not provided");}
     var sql = "delete from employee  ";
-    sql+= "where id="+ data.id;
+    sql+= "where id="+data.params.id;
     super.execSql(sql,function(data,err){
         if(err){
                 msg.show500(req,res,err);
         }
         else{
+            console.log("before 200");
             msg.show200(req,res,data);
+            console.log("after 200");
         }
      });
     }        

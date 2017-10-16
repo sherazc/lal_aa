@@ -24,15 +24,20 @@ export default class baseDao{
          });         
     }
     execSql(sql,callback){
+        console.log(sql);
         let connection = this.connect();
         connection.query(sql,(err,data)=>{
             if(err){
-                callback(null,err);
+                console.log(err);
+                callback(err,null);
             }
             else{
-                callback(data);
+                console.log("else");
+                callback(null,data);
             }
         });
+        console.log("before close");
         this.endConnection(connection);
+        console.log("after close");
     }
 }

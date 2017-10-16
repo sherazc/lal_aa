@@ -10,6 +10,7 @@ class EmployeeController {
        addEmployeeConfirm (request, response) {
         employeeDao.addEmployee(request.body.name, request.body.salary, (name, salary) => {
                  employeeDao.findAll((employees) => {
+                     
                            response.render('list-employees', viewAttributesComposer('All Employees', {employees}));
                  });
              //response.render('add-employee-confirm', viewAttributesComposer('Add Employee Confirm', {name, salary}));
