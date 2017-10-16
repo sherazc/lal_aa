@@ -24,28 +24,28 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <%
-                        employees.forEach((employee) => {
-                            %>
-                        <tr>
-                            <td><%= employee.id%></td>
-                            <td><%= employee.name%></td>
-                            <td><%= employee.salary%></td>
-                            <td>
-                                <a href="/delete/<%= employee.id%>" class="btn btn-primary">
-                                    <span class="glyphicon glyphicon-remove-circle"></span>
-                                    Delete
-                                </a>
-                            </td>
-                            <td>
-                                 <a href="/update/<%= employee.id%>" class="btn btn-primary">
-                                    update
-                                 </a>
-                            </td>
-                        </tr>    
                             <%
-                        });
-                        %>
+                            employees.forEach((employee) => {
+                                %>
+                            <tr>
+                                <td><%= employee.id%></td>
+                                <td><%= employee.name%></td>
+                                <td><%= employee.salary%></td>
+                                <td>
+                                    <a href="/delete/<%= employee.id%>" class="btn btn-primary">
+                                        <span class="glyphicon glyphicon-remove-circle"></span>
+                                        Delete
+                                    </a>
+                                </td>
+                                <td>
+                                     <a href="/update/<%= employee.id%>" class="btn btn-primary">
+                                        update
+                                     </a>
+                                </td>
+                            </tr>    
+                                <%
+                            });
+                            %>
                     </tbody>
                 </table>
             </div>
