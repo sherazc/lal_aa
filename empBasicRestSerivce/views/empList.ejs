@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title><%= title %></title>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
+    </head>
+    <body>
+        <h1><%= title %></h1>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Emp Id</th>
+                    <th>Name</th>
+                    <th>Salary</th>
+                    <th colspan="2"><a href="/add" class="btn btn-primary" >Add Employee</a></th>
+                </tr>
+            </thead>
+            <tbody>
+                <% Employees.forEach((emp) => {
+                %>
+                <tr>  
+                    <td><%=emp.id %></td>
+                    <td><%=emp.name %></td>
+                    <td><%=emp.salary %></td>
+                    <td><a href="/<%= emp.id %>" class="btn btn-primary">Upate Employee</a></td>
+                    <td><a href="/delete/<%= emp.id %>" class="btn btn-primary">Delete Employee</a></td>
+                </tr>
+                <% });
+                %>
+        </tbody>
+        </table>
+    </body>
+</html>
