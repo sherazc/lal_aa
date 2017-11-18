@@ -1,0 +1,36 @@
+<%include partials/header.ejs%>
+ <div class="panel panel-default">
+            <div class="panel-heading">Employees</div>
+            <div class="panel-body">
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Salary</th>
+                            <th>Salary</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                      <% employees.forEach((employee) =>{
+                          %>
+                          <tr>
+                          <td><%=employee.id%></td>
+                          <td><%=employee.name%></td>
+                          <td><%=employee.salary%></td>
+                        <td>
+                            <a href="/delete/<%=employee.id%>" class="btn btn-primary">
+                            <span class="glyphicon glyphicon-remove-circle"></span>
+                            Delete
+                            </a>
+                        </td> 
+                        </tr>
+                        <%
+                      });
+                      %>
+                     
+                    </tbody>
+                </table>
+            </div>
+        </div>
+<%include partials/footer.ejs%>
