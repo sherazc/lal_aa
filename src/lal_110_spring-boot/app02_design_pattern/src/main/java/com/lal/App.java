@@ -15,7 +15,7 @@ public class App {
         SiteInventoryDao siteInventoryDao = new SiteInventoryDaoImpl();
         WarehouseInventoryDao warehouseInventoryDao = new WarehouseInventoryDaoImpl();
 
-        StoreInventory storeInventory = new StoreInventoryImpl(siteInventoryDao, warehouseInventoryDao);
+        StoreInventory storeInventory = StoreInventoryImpl.create(siteInventoryDao, warehouseInventoryDao);
 
         List<Item> allInventory = storeInventory.findAllInventory();
         System.out.println(allInventory);

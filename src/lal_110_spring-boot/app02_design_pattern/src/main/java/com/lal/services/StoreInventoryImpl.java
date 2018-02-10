@@ -12,7 +12,10 @@ public class StoreInventoryImpl implements StoreInventory {
     private SiteInventoryDao siteInventoryDao;
     private WarehouseInventoryDao warehouseInventoryDao;
 
-    public StoreInventoryImpl(SiteInventoryDao siteInventoryDao,
+    private StoreInventoryImpl() {
+    }
+
+    private StoreInventoryImpl(SiteInventoryDao siteInventoryDao,
                               WarehouseInventoryDao warehouseInventoryDao) {
         this.siteInventoryDao = siteInventoryDao;
         this.warehouseInventoryDao = warehouseInventoryDao;
@@ -22,8 +25,22 @@ public class StoreInventoryImpl implements StoreInventory {
         List<Item> siteItems = siteInventoryDao.getAll();
         List<Item> warehouseItems = warehouseInventoryDao.getAll();
         List<Item> allItems = new ArrayList<Item>();
-        allItems.addAll(siteItems);
-        allItems.addAll(warehouseItems);
+        if (siteItems != null) {
+            allItems.addAll(siteItems);
+        }
+        if (warehouseItems != null) {
+            allItems.addAll(warehouseItems);
+        }
         return allItems;
+    }
+
+    private static StoreInventory storeInventory;
+
+    public static StoreInventory create(SiteInventoryDao siteInventoryDao,
+                                              WarehouseInventoryDao warehouseInventoryDao) {
+        if (storeInventory == null) {
+            storeInventory = new StoreInventoryImpl(siteInventoryDao, warehouseInventoryDao);
+        }
+        return storeInventory;
     }
 }
