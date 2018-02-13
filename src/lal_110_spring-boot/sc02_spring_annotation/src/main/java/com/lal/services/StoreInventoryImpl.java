@@ -3,10 +3,13 @@ package com.lal.services;
 import com.lal.dao.SiteInventoryDao;
 import com.lal.dao.WarehouseInventoryDao;
 import com.lal.modal.Item;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@Component
 public class StoreInventoryImpl implements StoreInventory {
 
     private SiteInventoryDao siteInventoryDao;
@@ -15,6 +18,7 @@ public class StoreInventoryImpl implements StoreInventory {
     private StoreInventoryImpl() {
     }
 
+    @Autowired
     private StoreInventoryImpl(SiteInventoryDao siteInventoryDao,
                               WarehouseInventoryDao warehouseInventoryDao) {
         this.siteInventoryDao = siteInventoryDao;
