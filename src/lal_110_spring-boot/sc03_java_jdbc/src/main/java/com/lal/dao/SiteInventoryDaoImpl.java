@@ -1,19 +1,29 @@
 package com.lal.dao;
 
+import com.lal.datasource.ConnectionUtil;
 import com.lal.modal.Item;
 
-import java.util.Arrays;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by sheraz on 2/10/18.
- */
 public class SiteInventoryDaoImpl implements SiteInventoryDao {
     public List<Item> getAll() {
-        return Arrays.asList(
-                new Item(100, "Item 1", 100),
-                new Item(200, "Item 2", 200),
-                new Item(300, "Item 3", 300)
-        );
+        List<Item> items = new ArrayList<>();
+        try {
+            Connection connection = ConnectionUtil.createConnection();
+            ResultSet resultSet = connection.createStatement()
+                    .executeQuery("SELECT ID, NAME, PRICE FROM SITE_INVENTORY");
+            while (resultSet.next()) {
+                items.add(new Item(
+                        resultSet.getLong("ID"),
+                        resultSet.getString("NAME"),
+                        resultSet.getDouble("PRICE")));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return items;
     }
 }
