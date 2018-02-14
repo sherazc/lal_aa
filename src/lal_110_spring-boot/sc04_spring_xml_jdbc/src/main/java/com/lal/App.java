@@ -13,5 +13,7 @@ public class App {
         StoreInventory storeInventory = (StoreInventory) beanFactory.getBean("storeInventory");
         List<Item> items = storeInventory.findAllInventory();
         items.forEach(item -> System.out.println(item.getName()));
+
+
     }
 }
