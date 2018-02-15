@@ -1,10 +1,12 @@
 package com.lal.dao;
 
 import com.lal.modal.Item;
-import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
+import org.springframework.lang.Nullable;
 
-import java.util.Arrays;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.List;
 
 public class WarehouseInventoryDaoImpl implements WarehouseInventoryDao {
@@ -16,10 +18,15 @@ public class WarehouseInventoryDaoImpl implements WarehouseInventoryDao {
     }
 
     public List<Item> getAll() {
-        return Arrays.asList(
-                new Item(400, "Item 4", 400),
-                new Item(500, "Item 5", 500),
-                new Item(600, "Item 6", 600)
-        );
+        return jdbcTemplate.query("SELECT ID, NAME, PRICE FROM WAREHOUSE_INVENTORY", new RowMapper<Item>() {
+            @Nullable
+            @Override
+            public Item mapRow(ResultSet rs, int rowNum) throws SQLException {
+                return new Item(
+                        rs.getLong("ID"),
+                        rs.getString("NAME"),
+                        rs.getDouble("PRICE"));
+            }
+        });
     }
 }

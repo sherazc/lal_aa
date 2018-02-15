@@ -1,9 +1,12 @@
 package com.lal.dao;
 
 import com.lal.modal.Item;
+import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
+import org.springframework.lang.Nullable;
 
-import java.util.Arrays;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.List;
 
 public class SiteInventoryDaoImpl implements SiteInventoryDao {
@@ -15,10 +18,16 @@ public class SiteInventoryDaoImpl implements SiteInventoryDao {
     }
 
     public List<Item> getAll() {
-        return Arrays.asList(
-                new Item(100, "Item 1", 100),
-                new Item(200, "Item 2", 200),
-                new Item(300, "Item 3", 300)
-        );
+        return jdbcTemplate.query("SELECT ID, NAME, PRICE FROM SITE_INVENTORY", new RowMapper<Item>() {
+            @Nullable
+            @Override
+            public Item mapRow(ResultSet rs, int rowNum) throws SQLException {
+                return new Item(
+                        rs.getLong("ID"),
+                        rs.getString("NAME"),
+                        rs.getDouble("PRICE"));
+            }
+        });
+
     }
 }
