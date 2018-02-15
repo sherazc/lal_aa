@@ -20,7 +20,6 @@
         <constructor-arg name="dataSource" ref="dataSource"/>
     </bean>
 
-
     <jdbc:embedded-database id="dataSource" type="HSQL">
         <jdbc:script location="classpath:create_db.sql"/>
     </jdbc:embedded-database>
