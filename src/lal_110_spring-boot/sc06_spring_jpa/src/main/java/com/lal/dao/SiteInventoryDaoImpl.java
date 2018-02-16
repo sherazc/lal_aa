@@ -7,6 +7,8 @@ import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.lang.Nullable;
 import org.springframework.stereotype.Repository;
 
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
@@ -14,15 +16,20 @@ import java.util.List;
 @Repository
 public class SiteInventoryDaoImpl implements SiteInventoryDao {
 
-    private NamedParameterJdbcTemplate jdbcTemplate;
+    @PersistenceContext
+    private EntityManager em;
 
     @Autowired
-    public SiteInventoryDaoImpl(NamedParameterJdbcTemplate jdbcTemplate) {
-        this.jdbcTemplate = jdbcTemplate;
+    public SiteInventoryDaoImpl(EntityManager em) {
+        this.em = em;
     }
 
+
+
+
+
     public List<Item> getAll() {
-        return jdbcTemplate.query("SELECT ID, NAME, PRICE FROM SITE_INVENTORY", new RowMapper<Item>() {
+        /*return jdbcTemplate.query("SELECT ID, NAME, PRICE FROM SITE_INVENTORY", new RowMapper<Item>() {
             @Nullable
             @Override
             public Item mapRow(ResultSet rs, int rowNum) throws SQLException {
@@ -32,6 +39,8 @@ public class SiteInventoryDaoImpl implements SiteInventoryDao {
                         rs.getDouble("PRICE"));
             }
         });
+        */
 
+        return null;
     }
 }

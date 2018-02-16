@@ -14,22 +14,4 @@ import javax.sql.DataSource;
 @Configuration
 @ComponentScan("com.lal")
 public class SpringConfigs {
-
-    @Autowired
-    private DataSource dataSource;
-
-    @Bean
-    public DataSource dataSource() {
-        EmbeddedDatabaseBuilder builder = new EmbeddedDatabaseBuilder();
-        EmbeddedDatabase db = builder
-                .setType(EmbeddedDatabaseType.HSQL)
-                .addScript("classpath:create_db.sql")
-                .build();
-        return db;
-    }
-
-    @Bean
-    public NamedParameterJdbcTemplate jdbcTemplate() {
-        return new NamedParameterJdbcTemplate(dataSource);
-    }
 }
