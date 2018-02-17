@@ -13,6 +13,7 @@ import java.util.List;
 
 @Repository
 public class WarehouseInventoryDaoImpl implements WarehouseInventoryDao {
+/*
 
     private NamedParameterJdbcTemplate jdbcTemplate;
 
@@ -20,8 +21,11 @@ public class WarehouseInventoryDaoImpl implements WarehouseInventoryDao {
     public WarehouseInventoryDaoImpl(NamedParameterJdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
     }
+*/
 
     public List<Item> getAll() {
+/*
+
         return jdbcTemplate.query("SELECT ID, NAME, PRICE FROM WAREHOUSE_INVENTORY", new RowMapper<Item>() {
             @Nullable
             @Override
@@ -32,5 +36,8 @@ public class WarehouseInventoryDaoImpl implements WarehouseInventoryDao {
                         rs.getDouble("PRICE"));
             }
         });
+*/
+
+        return null;
     }
 }

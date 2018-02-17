@@ -16,19 +16,14 @@ import java.util.List;
 @Repository
 public class SiteInventoryDaoImpl implements SiteInventoryDao {
 
+
     @PersistenceContext
     private EntityManager em;
 
-    @Autowired
-    public SiteInventoryDaoImpl(EntityManager em) {
-        this.em = em;
-    }
-
-
-
-
 
     public List<Item> getAll() {
+
+        System.out.println(em);
         /*return jdbcTemplate.query("SELECT ID, NAME, PRICE FROM SITE_INVENTORY", new RowMapper<Item>() {
             @Nullable
             @Override

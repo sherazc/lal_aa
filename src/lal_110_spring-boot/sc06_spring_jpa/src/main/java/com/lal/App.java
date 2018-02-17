@@ -1,5 +1,6 @@
 package com.lal;
 
+import com.lal.dao.DaoConfigs;
 import com.lal.modal.Item;
 import com.lal.services.StoreInventory;
 import org.springframework.beans.factory.BeanFactory;

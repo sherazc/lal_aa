@@ -1,6 +1,11 @@
 package com.lal.modal;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+
+@Entity
 public class Item {
+    @Id
     private long id;
     private String name;
     private double price;
