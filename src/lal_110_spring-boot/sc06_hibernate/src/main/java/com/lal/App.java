@@ -1,18 +1,23 @@
 package com.lal;
 
-import com.lal.dao.DaoConfigs;
-import com.lal.modal.Item;
-import com.lal.services.StoreInventory;
-import org.springframework.beans.factory.BeanFactory;
-import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import com.lal.datasource.ConnectionUtil;
+import com.lal.services.DbInitializer;
+import org.hibernate.Session;
+import org.hibernate.jdbc.Work;
 
-import java.util.List;
+import java.sql.Connection;
+import java.sql.SQLException;
 
 public class App {
     public static void main(String[] args) {
-        BeanFactory beanFactory = new AnnotationConfigApplicationContext(SpringConfigs.class);
-        StoreInventory storeInventory = (StoreInventory) beanFactory.getBean(StoreInventory.class);
+
+
+        System.out.println("Now What");
+
+
+/*
         List<Item> items = storeInventory.findAllInventory();
         items.forEach(item -> System.out.format("%d, %s, %.2f\n", item.getId(), item.getName(), item.getPrice()));
+        */
     }
 }

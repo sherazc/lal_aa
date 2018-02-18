@@ -2,14 +2,14 @@ package com.lal.services;
 
 import com.lal.dao.SiteInventoryDao;
 import com.lal.dao.WarehouseInventoryDao;
+import com.lal.entity.SiteInventoryItem;
+import com.lal.entity.WarehouseInventoryItem;
 import com.lal.modal.Item;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
 
-@Component
+
 public class StoreInventoryImpl implements StoreInventory {
 
     private SiteInventoryDao siteInventoryDao;
@@ -18,7 +18,6 @@ public class StoreInventoryImpl implements StoreInventory {
     private StoreInventoryImpl() {
     }
 
-    @Autowired
     private StoreInventoryImpl(SiteInventoryDao siteInventoryDao,
                               WarehouseInventoryDao warehouseInventoryDao) {
         this.siteInventoryDao = siteInventoryDao;
@@ -26,15 +25,26 @@ public class StoreInventoryImpl implements StoreInventory {
     }
 
     public List<Item> findAllInventory() {
-        List<Item> siteItems = siteInventoryDao.getAll();
-        List<Item> warehouseItems = warehouseInventoryDao.getAll();
-        List<Item> allItems = new ArrayList<Item>();
-        if (siteItems != null) {
-            allItems.addAll(siteItems);
+        List<Item> allItems = new ArrayList<>();
+        List<SiteInventoryItem> siteInventoryItems = siteInventoryDao.getAll();
+        List<WarehouseInventoryItem> warehouseInventoryItems = warehouseInventoryDao.getAll();
+        if (siteInventoryItems != null) {
+            siteInventoryItems.forEach(
+                    siteInventoryItem -> allItems.add(
+                            new Item(siteInventoryItem.getId(),
+                                    siteInventoryItem.getName(),
+                                    siteInventoryItem.getPrice())));
         }
-        if (warehouseItems != null) {
-            allItems.addAll(warehouseItems);
+
+
+        if (warehouseInventoryItems != null) {
+            warehouseInventoryItems.forEach(
+                    warehouseInventoryItem -> allItems.add(
+                            new Item(warehouseInventoryItem.getId(),
+                                    warehouseInventoryItem.getName(),
+                                    warehouseInventoryItem.getPrice())));
         }
+
         return allItems;
     }
 

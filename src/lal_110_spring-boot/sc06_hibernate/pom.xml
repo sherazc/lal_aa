@@ -15,12 +15,20 @@
         <hibernate.version>5.2.13.Final</hibernate.version>
     </properties>
 
-    <!--Hibernate-->
+
     <dependencies>
+        <!--Hibernate-->
         <dependency>
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate-core</artifactId>
             <version>${hibernate.version}</version>
+        </dependency>
+
+        <!--HSQLDB-->
+        <dependency>
+            <groupId>org.hsqldb</groupId>
+            <artifactId>hsqldb</artifactId>
+            <version>2.4.0</version>
         </dependency>
     </dependencies>
 
