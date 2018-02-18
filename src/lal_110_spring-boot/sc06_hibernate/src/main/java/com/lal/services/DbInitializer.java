@@ -1,18 +1,14 @@
 package com.lal.services;
 
 import org.hibernate.Session;
+import org.hibernate.Transaction;
 
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.sql.Connection;
-import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.Arrays;
 
 public class DbInitializer {
-
-    private static boolean initialized = false;
 
     public static void initialize(Session session) {
         try {
@@ -23,7 +19,9 @@ public class DbInitializer {
                     .map(String::trim)
                     .filter(query -> query.length() > 0)
                     .forEach(query -> {
+                        Transaction transaction = session.beginTransaction();
                         session.createNativeQuery(query).executeUpdate();
+                        transaction.commit();
                     });
             session.close();
         } catch (Exception e) {

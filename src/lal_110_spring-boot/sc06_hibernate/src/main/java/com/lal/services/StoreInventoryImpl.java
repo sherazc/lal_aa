@@ -2,9 +2,12 @@ package com.lal.services;
 
 import com.lal.dao.SiteInventoryDao;
 import com.lal.dao.WarehouseInventoryDao;
+import com.lal.datasource.ConnectionUtil;
 import com.lal.entity.SiteInventoryItem;
 import com.lal.entity.WarehouseInventoryItem;
 import com.lal.modal.Item;
+import org.hibernate.Session;
+import org.hibernate.Transaction;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,19 +18,38 @@ public class StoreInventoryImpl implements StoreInventory {
     private SiteInventoryDao siteInventoryDao;
     private WarehouseInventoryDao warehouseInventoryDao;
 
-    private StoreInventoryImpl() {
-    }
-
-    private StoreInventoryImpl(SiteInventoryDao siteInventoryDao,
+    public StoreInventoryImpl(SiteInventoryDao siteInventoryDao,
                               WarehouseInventoryDao warehouseInventoryDao) {
         this.siteInventoryDao = siteInventoryDao;
         this.warehouseInventoryDao = warehouseInventoryDao;
     }
 
+    @Override
+    public void storeItemInSite(Item item) {
+        WarehouseInventoryItem warehouseInventoryItem = new WarehouseInventoryItem(item.getId(), item.getName(), item.getPrice());
+
+        Session session = ConnectionUtil.getSessionFactory().openSession();
+        Transaction transaction = session.beginTransaction();
+        warehouseInventoryDao.save(session, warehouseInventoryItem);
+        transaction.commit();
+    }
+
+    @Override
+    public void storeItemInWarehouse(Item item) {
+        SiteInventoryItem siteInventoryItem = new SiteInventoryItem(item.getId(), item.getName(), item.getPrice());
+
+        Session session = ConnectionUtil.getSessionFactory().openSession();
+        Transaction transaction = session.beginTransaction();
+        siteInventoryDao.save(session, siteInventoryItem);
+        transaction.commit();
+    }
+
     public List<Item> findAllInventory() {
+        Session session = ConnectionUtil.getSessionFactory().openSession();
+
         List<Item> allItems = new ArrayList<>();
-        List<SiteInventoryItem> siteInventoryItems = siteInventoryDao.getAll();
-        List<WarehouseInventoryItem> warehouseInventoryItems = warehouseInventoryDao.getAll();
+        List<SiteInventoryItem> siteInventoryItems = siteInventoryDao.getAll(session);
+        List<WarehouseInventoryItem> warehouseInventoryItems = warehouseInventoryDao.getAll(session);
         if (siteInventoryItems != null) {
             siteInventoryItems.forEach(
                     siteInventoryItem -> allItems.add(
