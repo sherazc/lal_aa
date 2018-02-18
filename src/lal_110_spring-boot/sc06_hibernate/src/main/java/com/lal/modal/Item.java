@@ -5,24 +5,24 @@ import javax.persistence.Id;
 
 public class Item {
 
-    private long id;
+    private Long id;
     private String name;
     private double price;
 
     public Item() {
     }
 
-    public Item(long id, String name, double price) {
+    public Item(Long id, String name, double price) {
         this.id = id;
         this.name = name;
         this.price = price;
     }
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

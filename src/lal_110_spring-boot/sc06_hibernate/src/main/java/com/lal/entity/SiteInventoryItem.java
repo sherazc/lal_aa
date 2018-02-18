@@ -1,17 +1,19 @@
 package com.lal.entity;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Table(name = "SITE_INVENTORY")
 public class SiteInventoryItem {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private String name;
     private double price;
+
+    public SiteInventoryItem() {
+    }
 
     public SiteInventoryItem(Long id, String name, double price) {
         this.id = id;

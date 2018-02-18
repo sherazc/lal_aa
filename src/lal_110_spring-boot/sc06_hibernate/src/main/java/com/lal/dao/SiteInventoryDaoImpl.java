@@ -10,8 +10,12 @@ public class SiteInventoryDaoImpl implements SiteInventoryDao {
 
     @Override
     public List<SiteInventoryItem> getAll(Session session) {
-        // HQL
         Query query = session.createQuery("from SiteInventoryItem");
         return query.list();
+    }
+
+    @Override
+    public void save(Session session, SiteInventoryItem siteInventoryItem) {
+        session.persist(siteInventoryItem);
     }
 }

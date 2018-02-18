@@ -27,6 +27,7 @@ public class ConnectionUtil {
         properties.put("hibernate.connection.pool_size", "5");
         properties.put("hibernate.show_sql", "true");
         properties.put("hibernate.format_sql", "true");
+        properties.put("hibernate.dialect", "org.hibernate.dialect.HSQLDialect");
 
         return new Configuration()
                 .addAnnotatedClass(SiteInventoryItem.class)
