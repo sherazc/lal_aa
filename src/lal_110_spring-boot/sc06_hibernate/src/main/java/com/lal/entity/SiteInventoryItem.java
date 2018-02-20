@@ -12,6 +12,7 @@ public class SiteInventoryItem {
     private String name;
     private double price;
 
+    // Empty Constructor is required by Hibernate
     public SiteInventoryItem() {
     }
 

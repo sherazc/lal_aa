@@ -13,6 +13,7 @@ public class WarehouseInventoryItem {
     private String name;
     private double price;
 
+    // Empty Constructor is required by Hibernate
     public WarehouseInventoryItem() {
     }
 
