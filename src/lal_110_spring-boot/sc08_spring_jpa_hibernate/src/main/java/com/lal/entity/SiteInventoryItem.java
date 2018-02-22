@@ -1,29 +1,32 @@
-package com.lal.modal;
+package com.lal.entity;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
-public class Item {
+@Table(name = "SITE_INVENTORY")
+public class SiteInventoryItem {
     @Id
-    private long id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
     private String name;
     private double price;
 
-    public Item() {
+    // Empty Constructor is required by Hibernate
+    public SiteInventoryItem() {
     }
 
-    public Item(long id, String name, double price) {
+    public SiteInventoryItem(Long id, String name, double price) {
         this.id = id;
         this.name = name;
         this.price = price;
     }
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
