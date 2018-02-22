@@ -1,9 +1,9 @@
 package com.lal.dao;
 
 import com.lal.entity.WarehouseInventoryItem;
-import org.hibernate.query.Query;
 
 import javax.persistence.EntityManager;
+import javax.persistence.Query;
 import java.util.List;
 
 
@@ -12,7 +12,7 @@ public class WarehouseInventoryDaoImpl implements WarehouseInventoryDao {
     @Override
     public List<WarehouseInventoryItem> getAll(EntityManager session) {
         Query query = session.createQuery("from WarehouseInventoryItem");
-        return query.list();
+        return query.getResultList();
     }
 
     @Override
