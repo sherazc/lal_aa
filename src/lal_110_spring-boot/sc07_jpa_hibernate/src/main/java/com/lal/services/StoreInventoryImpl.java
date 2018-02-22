@@ -6,9 +6,9 @@ import com.lal.datasource.ConnectionUtil;
 import com.lal.entity.SiteInventoryItem;
 import com.lal.entity.WarehouseInventoryItem;
 import com.lal.modal.Item;
-import org.hibernate.Session;
-import org.hibernate.Transaction;
 
+import javax.persistence.EntityManager;
+import javax.persistence.EntityTransaction;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -27,10 +27,10 @@ public class StoreInventoryImpl implements StoreInventory {
     @Override
     public void storeItemInSite(Item item) {
         WarehouseInventoryItem warehouseInventoryItem = new WarehouseInventoryItem(item.getId(), item.getName(), item.getPrice());
-
-        Session session = ConnectionUtil.getSessionFactory().openSession();
-        Transaction transaction = session.beginTransaction();
-        warehouseInventoryDao.save(session, warehouseInventoryItem);
+        EntityManager entityManager = ConnectionUtil.getEmf().createEntityManager();
+        EntityTransaction transaction = entityManager.getTransaction();
+        transaction.begin();
+        warehouseInventoryDao.save(entityManager, warehouseInventoryItem);
         transaction.commit();
     }
 
@@ -38,18 +38,20 @@ public class StoreInventoryImpl implements StoreInventory {
     public void storeItemInWarehouse(Item item) {
         SiteInventoryItem siteInventoryItem = new SiteInventoryItem(item.getId(), item.getName(), item.getPrice());
 
-        Session session = ConnectionUtil.getSessionFactory().openSession();
-        Transaction transaction = session.beginTransaction();
-        siteInventoryDao.save(session, siteInventoryItem);
+        EntityManager entityManager = ConnectionUtil.getEmf().createEntityManager();
+        EntityTransaction transaction = entityManager.getTransaction();
+        transaction.begin();
+        siteInventoryDao.save(entityManager, siteInventoryItem);
         transaction.commit();
     }
 
     public List<Item> findAllInventory() {
-        Session session = ConnectionUtil.getSessionFactory().openSession();
+        EntityManager entityManager = ConnectionUtil.getEmf().createEntityManager();
 
         List<Item> allItems = new ArrayList<>();
-        List<SiteInventoryItem> siteInventoryItems = siteInventoryDao.getAll(session);
-        List<WarehouseInventoryItem> warehouseInventoryItems = warehouseInventoryDao.getAll(session);
+
+        List<SiteInventoryItem> siteInventoryItems = siteInventoryDao.getAll(entityManager);
+        List<WarehouseInventoryItem> warehouseInventoryItems = warehouseInventoryDao.getAll(entityManager);
         if (siteInventoryItems != null) {
             siteInventoryItems.forEach(
                     siteInventoryItem -> allItems.add(

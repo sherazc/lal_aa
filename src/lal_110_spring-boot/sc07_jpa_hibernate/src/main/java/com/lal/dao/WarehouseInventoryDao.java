@@ -1,12 +1,12 @@
 package com.lal.dao;
 
 import com.lal.entity.WarehouseInventoryItem;
-import org.hibernate.Session;
 
+import javax.persistence.EntityManager;
 import java.util.List;
 
 public interface WarehouseInventoryDao {
-    List<WarehouseInventoryItem> getAll(Session session);
+    List<WarehouseInventoryItem> getAll(EntityManager session);
 
-    void save(Session session, WarehouseInventoryItem warehouseInventoryItem);
+    void save(EntityManager session, WarehouseInventoryItem warehouseInventoryItem);
 }

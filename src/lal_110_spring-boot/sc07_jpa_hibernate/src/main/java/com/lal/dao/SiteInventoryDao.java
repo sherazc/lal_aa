@@ -1,13 +1,13 @@
 package com.lal.dao;
 
 import com.lal.entity.SiteInventoryItem;
-import org.hibernate.Session;
 
+import javax.persistence.EntityManager;
 import java.util.List;
 
 public interface SiteInventoryDao {
 
-    List<SiteInventoryItem> getAll(Session session);
+    List<SiteInventoryItem> getAll(EntityManager entityManager);
 
-    void save(Session session, SiteInventoryItem siteInventoryItem);
+    void save(EntityManager entityManager, SiteInventoryItem siteInventoryItem);
 }

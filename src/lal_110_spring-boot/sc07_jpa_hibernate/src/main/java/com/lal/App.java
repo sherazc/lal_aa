@@ -15,7 +15,7 @@ import java.util.List;
 public class App {
     public static void main(String[] args) {
         // Initializing
-        DbInitializer.initialize(ConnectionUtil.getSessionFactory().openSession());
+        DbInitializer.initialize(ConnectionUtil.getEmf().createEntityManager());
 
         // Creating Services and DAOs
         SiteInventoryDao siteInventoryDao = new SiteInventoryDaoImpl();
@@ -32,6 +32,6 @@ public class App {
         List<Item> items = storeInventory.findAllInventory();
         items.forEach(item -> System.out.format("%d, %s, %.2f\n", item.getId(), item.getName(), item.getPrice()));
 
-        ConnectionUtil.getSessionFactory().close();
+        ConnectionUtil.getEmf().close();
     }
 }
