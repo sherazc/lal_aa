@@ -1,6 +1,5 @@
 package com.lal;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -15,9 +14,6 @@ import javax.sql.DataSource;
 @ComponentScan("com.lal")
 public class SpringConfigs {
 
-    @Autowired
-    private DataSource dataSource;
-
     @Bean
     public DataSource dataSource() {
         EmbeddedDatabaseBuilder builder = new EmbeddedDatabaseBuilder();
@@ -29,7 +25,7 @@ public class SpringConfigs {
     }
 
     @Bean
-    public NamedParameterJdbcTemplate jdbcTemplate() {
+    public NamedParameterJdbcTemplate jdbcTemplate(DataSource dataSource) {
         return new NamedParameterJdbcTemplate(dataSource);
     }
 }
