@@ -6,7 +6,7 @@ import javax.persistence.EntityManager;
 import java.util.List;
 
 public interface WarehouseInventoryDao {
-    List<WarehouseInventoryItem> getAll(EntityManager session);
+    List<WarehouseInventoryItem> getAll();
 
-    void save(EntityManager session, WarehouseInventoryItem warehouseInventoryItem);
+    void save(WarehouseInventoryItem warehouseInventoryItem);
 }

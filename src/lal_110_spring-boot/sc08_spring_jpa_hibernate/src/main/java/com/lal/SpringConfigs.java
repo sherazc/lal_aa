@@ -1,6 +1,5 @@
 package com.lal;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -8,7 +7,6 @@ import org.springframework.jdbc.datasource.embedded.EmbeddedDatabase;
 import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseBuilder;
 import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseType;
 import org.springframework.orm.jpa.JpaTransactionManager;
-import org.springframework.orm.jpa.JpaVendorAdapter;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 import org.springframework.transaction.PlatformTransactionManager;
@@ -22,9 +20,6 @@ import java.util.Properties;
 @ComponentScan("com.lal")
 @EnableTransactionManagement
 public class SpringConfigs {
-
-    // @Autowired
-    // private DataSource dataSource;
 
     @Bean
     public DataSource dataSource() {
@@ -41,7 +36,8 @@ public class SpringConfigs {
         // Create and initialize
         LocalContainerEntityManagerFactoryBean emf = new LocalContainerEntityManagerFactoryBean();
         emf.setDataSource(dataSource);
-        emf.setPackagesToScan("com.lal.entity");
+        emf.setPackagesToScan("com.lal");
+        //emf.setPersistenceUnitName("name");
 
 
         // This tells JPA which JPA implementation to use.

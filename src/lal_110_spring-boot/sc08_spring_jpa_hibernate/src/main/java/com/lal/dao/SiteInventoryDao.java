@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface SiteInventoryDao {
 
-    List<SiteInventoryItem> getAll(EntityManager entityManager);
+    List<SiteInventoryItem> getAll();
 
-    void save(EntityManager entityManager, SiteInventoryItem siteInventoryItem);
+    void save(SiteInventoryItem siteInventoryItem);
 }
