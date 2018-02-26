@@ -1,12 +1,12 @@
 package com.lal.dao;
 
 import com.lal.modal.Item;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
 
 import java.util.Arrays;
 import java.util.List;
 
-@Component
+@Repository
 public class WarehouseInventoryDaoImpl implements WarehouseInventoryDao {
     public List<Item> getAll() {
         return Arrays.asList(
