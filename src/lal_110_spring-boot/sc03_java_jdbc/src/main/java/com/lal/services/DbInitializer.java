@@ -1,8 +1,5 @@
 package com.lal.services;
 
-import com.lal.datasource.ConnectionUtil;
-
-import java.net.URISyntaxException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -12,8 +9,6 @@ import java.sql.Statement;
 import java.util.Arrays;
 
 public class DbInitializer {
-
-    private static boolean initialized = false;
 
     public static void initialize(Connection connection) {
         try {
